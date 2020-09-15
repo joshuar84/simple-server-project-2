@@ -4,49 +4,53 @@ http.createServer(function(req, res){
     if (req.url === "/OK") {
         console.log("Inbound 'OK' being processed");
         res.writeHead(200);
-        res.write('<h1>Hello world</h1>')
         res.end();
     } else if (req.url === '/Created') {
-        console.log('Inbound created');
+        console.log('Inbound-created');
         res.writeHead(201);
         res.end();
     } else if (req.url === '/Moved-Permanently') {
-        console.log('Resource moved');
-        res.writeHead(301, {'Location': "http://www.google.com"});
+        console.log('Moved-Permanently');
+        res.writeHead(301);
         res.end();
     } else if (req.url === '/Found') {
-        console.log('Resource moved temporarily');
-        res.writeHead(302, {'Location': 'https://www.github.com'});
+        console.log('Found');
+        res.writeHead(302);
         res.end();
     } else if (req.url === '/Bad-Request') {
-        console.log('Couldn\'t understand request');
+        console.log('Bad-Request');
         res.writeHead(400);
         res.end();
     } else if (req.url === '/Unauthorized') {
-        console.log('Not proper authentication');
+        console.log('Unauthorized');
         res.writeHead(401);
         res.end();
     } else if (req.url === '/Forbidden') {
-        console.log('Improper credentials');
+        console.log('Forbidden');
         res.writeHead(403);
         res.end();
     } else if (req.url === '/Internal-Server-Error') {
-        console.log('Server error');
+        console.log('Internal-Server-Error');
         res.writeHead(500);
         res.end();
     } else if (req.url === '/Gateway-Timeout') {
-        console.log('Slow server response');
+        console.log('Gateway-Timeout');
         res.writeHead(504);
         res.end();
+    } else if (req.url === '/Bonus/Redirect') {
+        console.log('Forbidden');
+        res.writeHead(302, {'Location': 'http://localhost:3000/Forbidden'});
+        res.end();
+    } else if (req.url === '/Bonus/Webpage') {
+        res.writeHead(200);
+        res.write('<h1>Jello, Burled!</h1>');
+        res.end();
     } else {
-        console.log("Error code 404")
-        res.writeHead(404)
-        res.end()
+        console.log("Error code 404");
+        res.writeHead(404);
+        res.end();
     }
     res.end();
 }).listen(3000, function(){
-    console.log("listening on port 3000...")
+    console.log("listening on port 3000...");
 })
-
-
-
